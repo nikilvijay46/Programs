@@ -1,50 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>My Programs</title>
-    <style>
-        body {
-            font-family: monospace;
-            padding: 20px;
-        }
-
-        pre {
-            background: #f4f4f4;
-            padding: 15px;
-            border-radius: 5px;
-            position: relative;
-        }
-
-        button.copy-btn {
-            position: absolute;
-            right: 10px;
-            top: 10px;
-            background: #0073aa;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>My Programs</title>
+<style>
+  body { font-family: monospace; padding: 20px; }
+  .code-block {
+    position: relative;
+    margin-bottom: 30px;
+  }
+  pre {
+    background: #f4f4f4;
+    padding: 15px;
+    border-radius: 5px;
+    white-space: pre-wrap;
+  }
+  button.copy-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background: #0073aa;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+</style>
 </head>
-
 <body>
 
-    <h2>Python Program: Factorial</h2>
-    <pre id="code1">
+<h2>Python Program: Factorial</h2>
+<div class="code-block">
+  <button class="copy-btn" onclick="copyCode('code1')">Copy</button>
+  <pre id="code1">
 def factorial(n):
     return 1 if n == 0 else n * factorial(n - 1)
 
 print(factorial(5))  # Output: 120
-<button class="copy-btn" onclick="copyCode('code1')">Copy</button>
-</pre>
+  </pre>
+</div>
 
-    <h2>Python Program: Fibonacci</h2>
-    <pre id="code2">
+<h2>Python Program: Fibonacci</h2>
+<div class="code-block">
+  <button class="copy-btn" onclick="copyCode('code2')">Copy</button>
+  <pre id="code2">
 def fibonacci(n):
     a, b = 0, 1
     for _ in range(n):
@@ -52,27 +53,19 @@ def fibonacci(n):
         a, b = b, a + b
 
 fibonacci(10)
-<button class="copy-btn" onclick="copyCode('code2')">Copy</button>
-</pre>
+  </pre>
+</div>
 
-    <script>
-        function copyCode(id) {
-            const codeBlock = document.getElementById(id);
-            // Remove the copy button text before copying
-            const range = document.createRange();
-            range.selectNodeContents(codeBlock);
-            const selection = window.getSelection();
-            selection.removeAllRanges();
-            selection.addRange(range);
-            try {
-                document.execCommand('copy');
-            } catch (err) {
-                alert('Failed to copy');
-            }
-            selection.removeAllRanges();
-        }
-    </script>
+<script>
+function copyCode(id) {
+  const code = document.getElementById(id).innerText;
+  navigator.clipboard.writeText(code).then(() => {
+    alert("Copied!");
+  }).catch(() => {
+    alert("Failed to copy");
+  });
+}
+</script>
 
 </body>
-
 </html>
