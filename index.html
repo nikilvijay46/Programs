@@ -60,7 +60,6 @@ fibonacci(10)
 function copyCode(id) {
   const code = document.getElementById(id).innerText;
   navigator.clipboard.writeText(code).then(() => {
-    alert("Copied!");
   }).catch(() => {
     alert("Failed to copy");
   });
